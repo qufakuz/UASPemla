@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="kosapp.KosanController" stylesheets="@style.css">
+    <center>
+        <VBox spacing="20" alignment="TOP_CENTER">
+            <padding>
+                <Insets top="20" right="30" bottom="20" left="30"/>
+            </padding>
+
+            <!-- Form Input -->
+            <GridPane hgap="15" vgap="10" alignment="CENTER">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="20"/>
+                    <ColumnConstraints percentWidth="30"/>
+                    <ColumnConstraints percentWidth="20"/>
+                    <ColumnConstraints percentWidth="30"/>
+                </columnConstraints>
+
+                <rowConstraints>
+                    <RowConstraints minHeight="30"/>
+                    <RowConstraints minHeight="30"/>
+                    <RowConstraints minHeight="60"/>
+                </rowConstraints>
+
+                <Label text="Nama Kosan:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="tfNama" promptText="Nama Kosan" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Alamat:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                <TextField fx:id="tfAlamat" promptText="Alamat Kosan" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+                <Label text="Harga:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="tfHarga" promptText="Harga per bulan" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="Deskripsi:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextArea fx:id="tfDeskripsi" promptText="Deskripsi kosan" prefRowCount="2"
+                          GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3"/>
+            </GridPane>
+
+
+            <!-- Gambar -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="tfImagePath" promptText="Path Gambar" editable="false" prefWidth="400"/>
+                <Button fx:id="btnBrowseImage" text="Browse Gambar" onAction="#handleBrowseImage" />
+            </HBox>
+            <ImageView fx:id="imageViewPreview" fitWidth="300" fitHeight="180" preserveRatio="true" />
+
+            <!-- Tombol Aksi -->
+            <HBox spacing="15" alignment="CENTER">
+                <Button text="Tambah" onAction="#handleTambah"/>
+                <Button text="Update" onAction="#handleUpdate"/>
+                <Button text="Hapus" onAction="#handleHapus"/>
+            </HBox>
+
+            <!-- Tabel Data -->
+            <TableView fx:id="tableKosan" onMouseClicked="#handleSelect" prefHeight="300" prefWidth="820">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+                    <TableColumn fx:id="colNama" text="Nama" prefWidth="150"/>
+                    <TableColumn fx:id="colAlamat" text="Alamat" prefWidth="200"/>
+                    <TableColumn fx:id="colHarga" text="Harga" prefWidth="100"/>
+                    <TableColumn fx:id="colGambar" text="Gambar" prefWidth="120"/>
+                    <TableColumn fx:id="colDeskripsi" text="Deskripsi" prefWidth="200"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>
