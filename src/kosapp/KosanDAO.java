@@ -72,4 +72,28 @@ public class KosanDAO {
             System.out.println("Delete failed: " + e.getMessage());
         }
     }
+
+    public Kosan getKosanById(int id) {
+        String sql = "SELECT * FROM kosan WHERE id = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return new Kosan(
+                        rs.getInt("id"),
+                        rs.getString("nama"),
+                        rs.getString("alamat"),
+                        rs.getInt("harga"),
+                        rs.getString("imagePath"),
+                        rs.getString("deskripsi")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println("getKosanById failed: " + e.getMessage());
+        }
+        return null;
+    }
+
+
 }

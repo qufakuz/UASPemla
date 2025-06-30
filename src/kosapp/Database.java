@@ -40,12 +40,31 @@ public class Database {
                 "FOREIGN KEY(kosan_id) REFERENCES kosan(id)" +
                 ");";
 
+        String sqlPemesanan = "CREATE TABLE IF NOT EXISTS pemesanan (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "kosan_id INTEGER NOT NULL," +
+                "nama_kosan TEXT NOT NULL," +  // << Tambahkan ini
+                "nama_client TEXT NOT NULL," +
+                "tanggal_pesan TEXT NOT NULL" +
+                ");";
+        String sqlClientUser = "CREATE TABLE IF NOT EXISTS client_user (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "nama TEXT NOT NULL," +
+                "email TEXT," +
+                "username TEXT NOT NULL UNIQUE," +
+                "password TEXT NOT NULL" +
+                ");";
+
+
+
         try (Statement stmt = conn.createStatement()) {
             stmt.execute(sqlKosan);
             stmt.execute(sqlUlasan);
+            stmt.execute(sqlPemesanan); // Tambahkan riwayat pemesanan
+            stmt.execute(sqlClientUser);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
 }

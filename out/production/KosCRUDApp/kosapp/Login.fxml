@@ -6,7 +6,7 @@
 
 <StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="kosapp.LoginController" stylesheets="@style.css">
     <children>
-        <VBox spacing="150" alignment="CENTER" maxWidth="500" >
+        <VBox spacing="15" alignment="CENTER" maxWidth="500" >
             <padding>
                 <Insets top="30" right="30" bottom="30" left="30"/>
             </padding>

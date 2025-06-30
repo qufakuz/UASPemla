@@ -6,7 +6,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+
+import java.util.List;
 
 public class ClientController {
     @FXML private VBox containerKosan;
@@ -43,12 +46,21 @@ public class ClientController {
 
         confirm.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
+                new PemesananDAO().tambahPemesanan(new Pemesanan(
+                        selected.getId(),
+                        selected.getNama(),
+                        currentClient.getNama(),
+                        java.time.LocalDate.now().toString()
+                ));
+
                 dao.deleteKosan(selected.getId());
                 loadCards();
-                showAlert("Sukses", "Kosan berhasil dibeli dan dihapus.");
+                showAlert("Sukses", "Kosan berhasil dibeli dan dicatat di riwayat.");
             }
         });
     }
+
+
 
     public void setClientUser(ClientUser client) {
         this.currentClient = client;
@@ -235,5 +247,27 @@ public class ClientController {
             loadCards();
         });
     }
+
+    @FXML
+    private void handleLihatRiwayat() {
+        List<Pemesanan> riwayat = new PemesananDAO().getRiwayatByClient(currentClient.getNama());
+
+        StringBuilder msg = new StringBuilder("Riwayat Pemesanan Anda:\n\n");
+        for (Pemesanan p : riwayat) {
+            msg.append("Nama Kos: ").append(p.getNamaKosan())
+                    .append("\nTanggal: ").append(p.getTanggalPesan())
+                    .append("\n\n");
+
+        }
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Riwayat Pemesanan");
+        alert.setHeaderText(null);
+        alert.setContentText(msg.toString());
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alert.showAndWait();
+    }
+
+
 
 }
