@@ -43,7 +43,7 @@ public class Database {
         String sqlPemesanan = "CREATE TABLE IF NOT EXISTS pemesanan (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "kosan_id INTEGER NOT NULL," +
-                "nama_kosan TEXT NOT NULL," +  // << Tambahkan ini
+                "nama_kosan TEXT NOT NULL," +  
                 "nama_client TEXT NOT NULL," +
                 "tanggal_pesan TEXT NOT NULL" +
                 ");";
@@ -54,6 +54,7 @@ public class Database {
                 "username TEXT NOT NULL UNIQUE," +
                 "password TEXT NOT NULL" +
                 ");";
+        
 
 
 
